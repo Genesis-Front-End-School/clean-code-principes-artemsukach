@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://api.wisey.app/api/v1';
+
 const apiClient = axios.create({
-  baseURL: 'https://api.wisey.app/api/v1',
+  baseURL: BASE_URL,
 });
 
 apiClient.interceptors.request.use(

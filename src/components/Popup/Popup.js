@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import popupStyles from './Popup.scss';
+import styles from './Popup.scss';
 
-const Popup = ({ className = '', onClose, show, children }) => {
+const Popup = ({ onClose, show, children }) => {
   const [isShow, setIsShow] = useState(false);
 
   const closeHandler = () => {
@@ -10,27 +10,27 @@ const Popup = ({ className = '', onClose, show, children }) => {
     onClose(false);
   };
 
+  const overlayClassName = `${styles.overlay} ${
+    !isShow ? styles.overlay_hidden : ''
+  }`;
+
   useEffect(() => {
     setIsShow(show);
   }, [show]);
 
   return (
     <div
-      style={{
-        visibility: isShow ? 'visible' : 'hidden',
-        opacity: isShow ? '1' : '0',
-      }}
-      className={`${popupStyles.overlay} ${className}`}
+      className={overlayClassName}
     >
-      <div className={popupStyles.popup}>
+      <div className={styles.popup}>
         <div
-          className={popupStyles.close}
+          className={styles.close}
           onClick={closeHandler}
           role="presentation"
         >
           &times;
         </div>
-        <div className={popupStyles.content}>{children}</div>
+        <div className={styles.content}>{children}</div>
       </div>
     </div>
   );

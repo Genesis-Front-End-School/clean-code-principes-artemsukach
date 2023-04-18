@@ -1,5 +1,5 @@
 import Hls from 'hls.js';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useBeforeUnload } from 'react-router-dom';
 
 import { useKeyDown } from '../../../hooks/useKeyDown';
@@ -17,13 +17,13 @@ const Video = ({ id, isCardVideo = false, videoLink, previewImageLink }) => {
 
   const changePlaybackRate = (pressedKey) => {
     switch (pressedKey) {
-      case 'u':
+      case KEY_PLAYBACK_RATE.SPEED_DOWN:
         if (video.current.playbackRate > 0.25) {
           video.current.playbackRate -= 0.25;
         }
         break;
 
-      case 'i':
+      case KEY_PLAYBACK_RATE.SPEED_UP:
         if (video.current.playbackRate < 4) {
           video.current.playbackRate += 0.25;
         }
@@ -42,12 +42,16 @@ const Video = ({ id, isCardVideo = false, videoLink, previewImageLink }) => {
     if (id) localStorage.setItem(id, video.currentTime);
   };
 
-  useBeforeUnload(() => {
-    saveVideoProgress(video.current, id);
-  });
+  useBeforeUnload(
+    useCallback(() => {
+      saveVideoProgress(video.current, id);
+    }, [])
+  );
 
   const stopVideo = () => {
-    if (canPlay) setShowPreview((prevState) => !prevState);
+    if (canPlay) {
+      setShowPreview((prevState) => !prevState);
+    }
 
     video.current.pause();
   };
@@ -57,7 +61,9 @@ const Video = ({ id, isCardVideo = false, videoLink, previewImageLink }) => {
   };
 
   const onEndedLoop = () => {
-    if (isCardVideo && !showPreview) playVideo();
+    if (isCardVideo && !showPreview) {
+      playVideo();
+    }
   };
 
   const toggleVolumeVideo = (event) => {
@@ -131,7 +137,6 @@ const Video = ({ id, isCardVideo = false, videoLink, previewImageLink }) => {
         preload="metadata"
         muted={isMutedVideo}
         ref={video}
-        // onProgress={handleProgress}
         onEnded={onEndedLoop}
         controls={!isCardVideo}
       />

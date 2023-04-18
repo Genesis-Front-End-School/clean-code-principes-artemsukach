@@ -50,7 +50,7 @@ const CoursePage = () => {
             <img
               className={styles.course__videoPreview}
               src={`${previewImageLink}/cover.webp`}
-              alt="Course prewiev"
+              alt="Course preview"
             />
           </div>
         </div>

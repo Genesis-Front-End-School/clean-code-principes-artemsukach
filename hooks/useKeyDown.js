@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export const useKeyDown = (callback, keys) => {
   const onKeyDown = (event) => {
-    const wasAnyKeyPressed = keys.some((key) => event.key === key);
+    const wasAnyKeyPressed = Object.values(keys).includes(event.key);
 
     if (wasAnyKeyPressed) {
       event.preventDefault();

@@ -32,12 +32,22 @@ const Pagination = ({
 
   const lastPage = paginationRange[paginationRange.length - 1];
 
+  const prevButtonClassName = `${styles.pagination__item} ${
+    currentPage === 1 ? 'disabled' : ''
+  }`;
+
+  const getPageNumberClassName = (page) => `${styles.pagination__item} ${
+    currentPage === page ? 'selected' : ''
+  }`;
+
+  const nextButtonClassName = `${styles.pagination__item} ${
+    currentPage === lastPage ? 'disabled' : ''
+  }`;
+
   return (
     <ul className={styles.pagination}>
       <li
-        className={`${styles.pagination__item} ${
-          currentPage === 1 ? 'disabled' : ''
-        }`}
+        className={prevButtonClassName}
         onClick={onPrevious}
         role="presentation"
       >
@@ -50,16 +60,14 @@ const Pagination = ({
               className={`${styles.pagination__item} ${styles.dots}`}
               key={pageNumber}
             >
-              &#8230;
+              {DOTS}
             </li>
           );
         }
 
         return (
           <li
-            className={`${styles.pagination__item} ${
-              currentPage === pageNumber ? 'selected' : ''
-            }`}
+            className={getPageNumberClassName(pageNumber)}
             key={pageNumber}
             onClick={() => onPageChange(pageNumber)}
             role="presentation"
@@ -68,13 +76,7 @@ const Pagination = ({
           </li>
         );
       })}
-      <li
-        className={`${styles.pagination__item} ${
-          currentPage === lastPage ? 'disabled' : ''
-        }`}
-        onClick={onNext}
-        role="presentation"
-      >
+      <li className={nextButtonClassName} onClick={onNext} role="presentation">
         <div className={`${styles.arrow} ${styles.right}`} />
       </li>
     </ul>

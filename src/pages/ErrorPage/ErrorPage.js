@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useNavigation } from 'react-router-dom';
+import { Link, useNavigation } from 'react-router-dom';
 
 import Spinner from '../../components/Spinner/Spinner';
 
@@ -13,9 +13,9 @@ const NotFoundPage = () => {
       <div className={styles.errorPage__titleWrapper}>
         <h1 className={styles.errorPage__title}>Error 404</h1>
       </div>
-      <NavLink className={styles.errorPage__goBackButton} to="/courses">
+      <Link className={styles.errorPage__goBackButton} to="/courses">
         Go Home
-      </NavLink>
+      </Link>
       {state === 'loading' && <Spinner />}
     </div>
   );
