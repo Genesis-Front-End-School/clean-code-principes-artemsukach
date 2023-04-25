@@ -6,7 +6,7 @@ import Lesson from '../../components/Lesson/Lesson';
 import Popup from '../../components/Popup/Popup';
 import Rating from '../../components/Rating/Rating';
 import Skills from '../../components/Skills/Skills';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import Video from '../../components/Video/Video';
 
 import styles from './CoursePage.scss';
 
@@ -59,13 +59,18 @@ const CoursePage = () => {
         <div className={styles.course__lessons}>
           <h2 className={styles.course__lessonsTitle}>Lessons</h2>
           {lessons.map((lesson) => (
-            <Lesson key={lesson.id} lesson={lesson} />
+            <Lesson
+              key={lesson.id}
+              lesson={lesson}
+            />
           ))}
         </div>
       </div>
-      <Popup show={showPopup} onClose={() => setShowPopup(false)}>
-        <VideoPlayer videoLink={link} previewImageLink={previewImageLink} />
-      </Popup>
+      {showPopup && (
+        <Popup show={showPopup} onClose={() => setShowPopup(false)}>
+          <Video videoLink={link} previewImageLink={previewImageLink} />
+        </Popup>
+      )}
     </>
   );
 };

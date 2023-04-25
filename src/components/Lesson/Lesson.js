@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Popup from '../Popup/Popup';
-import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Video from '../Video/Video';
 
 import LockLogo from './img/lock.svg';
 
@@ -32,7 +32,7 @@ const Lesson = ({ lesson }) => {
           show={showPopup}
           onClose={() => setShowPopup(false)}
         >
-          <VideoPlayer id={id} videoLink={link} />
+          <Video id={id} videoLink={link} />
           <p className={styles.lesson__instruction}>
             To speed up the video, use the (i) key. To reduce the video speed,
             use the key (u)

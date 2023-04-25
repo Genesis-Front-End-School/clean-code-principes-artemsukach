@@ -1,56 +1,31 @@
-import React, { useCallback, useEffect } from 'react';
-import { useBeforeUnload } from 'react-router-dom';
 import Hls from 'hls.js';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useBeforeUnload } from 'react-router-dom';
 
 import { useKeyDown } from '../../../hooks/useKeyDown';
-import {
-  KEY_PLAYBACK_RATE,
-  MAX_VIDEO_SPEED,
-  MIN_VIDEO_SPEED,
-  VIDEO_SPEED_STEP,
-} from '../../../utils/constants';
+import { KEY_PLAYBACK_RATE } from '../../../utils/constants';
+
+import VolumeLogo from './img/volume.svg';
 
 import styles from './Video.scss';
 
-const Video = ({
-  isCardVideo,
-  isMutedVideo,
-  playVideo,
-  showPreview,
-  setCanPlay,
-  video,
-  videoLink,
-  id,
-}) => {
-  const onEndedLoop = () => {
-    if (isCardVideo && !showPreview) {
-      playVideo();
-    }
-  };
-
-  const getVideoKey = (id) => `video_${id}`;
-
-  const saveVideoProgress = (video, id) => {
-    if (id) localStorage.setItem(getVideoKey(id), video.currentTime);
-  };
-
-  useBeforeUnload(
-    useCallback(() => {
-      saveVideoProgress(video.current, id);
-    }, [])
-  );
+const Video = ({ id, isCardVideo = false, videoLink, previewImageLink }) => {
+  const [showPreview, setShowPreview] = useState(true);
+  const [isMutedVideo, setIsMutedVideo] = useState(isCardVideo);
+  const [canPlay, setCanPlay] = useState(true);
+  const video = useRef(null);
 
   const changePlaybackRate = (pressedKey) => {
     switch (pressedKey) {
       case KEY_PLAYBACK_RATE.SPEED_DOWN:
-        if (video.current.playbackRate > MIN_VIDEO_SPEED) {
-          video.current.playbackRate -= VIDEO_SPEED_STEP;
+        if (video.current.playbackRate > 0.25) {
+          video.current.playbackRate -= 0.25;
         }
         break;
 
       case KEY_PLAYBACK_RATE.SPEED_UP:
-        if (video.current.playbackRate < MAX_VIDEO_SPEED) {
-          video.current.playbackRate += VIDEO_SPEED_STEP;
+        if (video.current.playbackRate < 4) {
+          video.current.playbackRate += 0.25;
         }
         break;
 
@@ -63,12 +38,62 @@ const Video = ({
     changePlaybackRate(pressedKey);
   }, KEY_PLAYBACK_RATE);
 
+  const saveVideoProgress = (video, id) => {
+    if (id) localStorage.setItem(id, video.currentTime);
+  };
+
+  useBeforeUnload(
+    useCallback(() => {
+      saveVideoProgress(video.current, id);
+    }, [])
+  );
+
+  const stopVideo = () => {
+    if (canPlay) {
+      setShowPreview((prevState) => !prevState);
+    }
+
+    video.current.pause();
+  };
+
+  const playVideo = () => {
+    video.current.play();
+  };
+
+  const onEndedLoop = () => {
+    if (isCardVideo && !showPreview) {
+      playVideo();
+    }
+  };
+
+  const toggleVolumeVideo = (event) => {
+    event.stopPropagation();
+    setIsMutedVideo((prevState) => !prevState);
+  };
+
+  const togglePreview = () => {
+    if (canPlay) {
+      setShowPreview((prevState) => !prevState);
+    }
+  };
+
+  const getHoverListeners = () => {
+    if (isCardVideo) {
+      return {
+        onMouseEnter: togglePreview,
+        onMouseLeave: stopVideo,
+      };
+    }
+
+    return {};
+  };
+
   useEffect(() => {
     const videoRef = video.current;
 
     if (Hls.isSupported() && video.current) {
       const config = {
-        startPosition: Number(localStorage.getItem(getVideoKey(id))),
+        startPosition: Number(localStorage.getItem(id)),
       };
 
       const hls = new Hls(config);
@@ -87,14 +112,46 @@ const Video = ({
   }, []);
 
   return (
-    <video
-      className={styles.video__video}
-      preload="metadata"
-      muted={isMutedVideo}
-      ref={video}
-      onEnded={onEndedLoop}
-      controls={!isCardVideo}
-    />
+    <div className={styles.video__media} {...getHoverListeners()}>
+      {isCardVideo && canPlay && (
+        <p
+          className={`${styles.video__hoverHint} ${
+            !showPreview ? styles.video__hoverHint_hidden : ''
+          }`}
+        >
+          Hover to play
+        </p>
+      )}
+      {isCardVideo && (
+        <img
+          className={`${styles.video__videoPreview} ${
+            !showPreview ? styles.video__videoPreview_hidden : ''
+          }`}
+          onAnimationEnd={playVideo}
+          src={`${previewImageLink}/cover.webp`}
+          alt="Course prewiev"
+        />
+      )}
+      <video
+        className={styles.video__video}
+        preload="metadata"
+        muted={isMutedVideo}
+        ref={video}
+        onEnded={onEndedLoop}
+        controls={!isCardVideo}
+      />
+      {isCardVideo && !showPreview && (
+        <div
+          className={`${styles.video__volume} ${
+            isMutedVideo ? styles.video__volume_muted : ''
+          }`}
+          onClick={toggleVolumeVideo}
+          role="presentation"
+        >
+          <VolumeLogo className={styles.video__volumeIcon} />
+        </div>
+      )}
+    </div>
   );
 };
 
