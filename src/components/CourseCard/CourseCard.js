@@ -9,7 +9,7 @@ import Skills from '../Skills/Skills';
 
 import Rating from '../Rating/Rating';
 
-import Video from '../Video/Video';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 import styles from './CourseCard.scss';
 
@@ -33,7 +33,7 @@ const CourseCard = ({ course }) => {
       role="presentation"
     >
       <div className={styles.courseCard__cover}>
-        <Video
+        <VideoPlayer
           isCardVideo
           videoLink={link}
           previewImageLink={previewImageLink}

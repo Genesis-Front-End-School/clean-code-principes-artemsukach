@@ -1,0 +1,30 @@
+.video__hoverHint_hidden {
+  animation: 0.7s hide-preview linear forwards;
+}
+
+.video__hoverHint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  font-size: 12px;
+  padding: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+@keyframes hide-preview {
+  0% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
