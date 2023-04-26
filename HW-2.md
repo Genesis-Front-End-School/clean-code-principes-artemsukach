@@ -34,3 +34,29 @@ export default connect(
 )(Text);
 
 ```
+
+### Interface Segregation
+
+Принцип Interface Segregation заснований на ідеї, що клієнти не повинні залежати від інтерфейсів, які вони не використовують. Це означає, що великі інтерфейси повинні бути розділені на менші та більш вузьконаправлені.
+
+Приклад з бібліотеки 'axios':
+
+У axios є instance, який описує методи для виконання HTTP-запитів. Але він дуже великий та містить методи, які не завжди потрібні клієнтам. 
+
+```javascript
+import axios from 'axios';
+
+const apiClient = axios.create({
+  baseURL: 'https://api.com',
+});
+
+apiClient.get('/data')
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+```
+
+У цьому прикладі використовується instance для виконання HTTP-запиту методом get(). Тобто клієнт отримує доступ лише до методів, які необхідні для виконання запитів.
