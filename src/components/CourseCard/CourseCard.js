@@ -2,14 +2,12 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { ROUTE_PATH } from '../../../utils/constants';
-import pluralize from '../../../helpers/pluralize';
+import Skills from 'src/components/Skills/Skills';
+import Rating from 'src/components/Rating/Rating';
+import VideoPlayer from 'src/components/VideoPlayer/VideoPlayer';
 
-import Skills from '../Skills/Skills';
-
-import Rating from '../Rating/Rating';
-
-import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import { ROUTE_PATH } from 'utils/constants';
+import pluralize from 'helpers/pluralize';
 
 import styles from './CourseCard.scss';
 

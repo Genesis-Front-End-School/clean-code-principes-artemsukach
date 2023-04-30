@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Popup from '../Popup/Popup';
-import VideoPlayer from '../VideoPlayer/VideoPlayer';
+import Popup from 'src/components/Popup/Popup';
+import VideoPlayer from 'src/components//VideoPlayer/VideoPlayer';
 
 import LockLogo from './img/lock.svg';
 

@@ -1,8 +1,3 @@
-.video__videoPreview {
-  z-index: 2;
-  pointer-events: none;
-}
-
 .video__videoPreview_hidden {
   animation: 0.7s hide-preview linear forwards;
 }
@@ -13,6 +8,8 @@
   object-fit: cover;
   position: absolute;
   border-radius: 4px 4px 0 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 @keyframes hide-preview {

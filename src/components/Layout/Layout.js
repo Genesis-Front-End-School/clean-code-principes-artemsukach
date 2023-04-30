@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet, useNavigation } from 'react-router-dom';
 
-import { useScrollToTop } from '../../../hooks/useScrollToTop';
+import Spinner from 'src/components/Spinner/Spinner'
 
-import Spinner from '../Spinner/Spinner';
+import { useScrollToTop } from 'hooks/useScrollToTop';;
 
 import styles from './Layout.scss';
 

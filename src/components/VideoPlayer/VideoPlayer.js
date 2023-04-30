@@ -1,12 +1,9 @@
 import React, { useRef, useState } from 'react';
 
-import VolumeButton from '../VolumeButton/VolumeButton';
-
-import VideoPreview from '../VideoPreview/VideoPreview';
-
-import HoverHint from '../HoverHint/HoverHint';
-
-import Video from '../Video/Video';
+import VolumeButton from 'src/components/VolumeButton/VolumeButton';
+import VideoPreview from 'src/components/VideoPreview/VideoPreview';
+import HoverHint from 'src/components/HoverHint/HoverHint';
+import Video from 'src/components/Video/Video';
 
 import styles from './VideoPlayer.scss';
 
@@ -21,22 +18,20 @@ const VideoPlayer = ({
   const [canPlay, setCanPlay] = useState(true);
   const video = useRef(null);
 
-  const stopVideo = () => {
+  const togglePreview = () => {
     if (canPlay) {
       setShowPreview((prevState) => !prevState);
     }
+  };
+
+  const stopVideo = () => {
+    togglePreview();
 
     video.current.pause();
   };
 
   const playVideo = () => {
     video.current.play();
-  };
-
-  const togglePreview = () => {
-    if (canPlay) {
-      setShowPreview((prevState) => !prevState);
-    }
   };
 
   const getHoverListeners = () => {

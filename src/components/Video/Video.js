@@ -2,13 +2,13 @@ import React, { useCallback, useEffect } from 'react';
 import { useBeforeUnload } from 'react-router-dom';
 import Hls from 'hls.js';
 
-import { useKeyDown } from '../../../hooks/useKeyDown';
+import { useKeyDown } from 'hooks/useKeyDown';
 import {
   KEY_PLAYBACK_RATE,
   MAX_VIDEO_SPEED,
   MIN_VIDEO_SPEED,
   VIDEO_SPEED_STEP,
-} from '../../../utils/constants';
+} from 'utils/constants';
 
 import styles from './Video.scss';
 
@@ -88,7 +88,7 @@ const Video = ({
 
   return (
     <video
-      className={styles.video__video}
+      className={styles.video}
       preload="metadata"
       muted={isMutedVideo}
       ref={video}

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+;
+import Lesson from 'src/components/Lesson/Lesson';
+import Popup from 'src/components/Popup/Popup';
+import Rating from 'src/components/Rating/Rating';
+import Skills from 'src/components/Skills/Skills';
+import VideoPlayer from 'src/components/VideoPlayer/VideoPlayer';
 
-import pluralize from '../../../helpers/pluralize';
-import Lesson from '../../components/Lesson/Lesson';
-import Popup from '../../components/Popup/Popup';
-import Rating from '../../components/Rating/Rating';
-import Skills from '../../components/Skills/Skills';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import pluralize from 'helpers/pluralize'
 
 import styles from './CoursePage.scss';
 

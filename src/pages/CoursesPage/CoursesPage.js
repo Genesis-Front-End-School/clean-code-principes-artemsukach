@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react';
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
 
-import { PAGE_SIZE } from '../../../utils/constants';
+import CourseCard from 'src/components/CourseCard/CourseCard';
+import Pagination from 'src/components/Pagination/Pagination';
 
-import CourseCard from '../../components/CourseCard/CourseCard';
-import Pagination from '../../components/Pagination/Pagination';
+import { PAGE_SIZE } from 'utils/constants';
 
 import styles from './CoursesPage.scss';
 
