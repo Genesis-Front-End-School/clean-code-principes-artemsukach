@@ -9,3 +9,7 @@ export const KEY_PLAYBACK_RATE = {
   SPEED_UP: 'i',
   SPEED_DOWN: 'u',
 };
+
+export const VIDEO_SPEED_STEP = 0.25;
+export const MIN_VIDEO_SPEED = 0.25;
+export const MAX_VIDEO_SPEED = 4;

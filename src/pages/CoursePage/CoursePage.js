@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+;
+import Lesson from 'src/components/Lesson/Lesson';
+import Popup from 'src/components/Popup/Popup';
+import Rating from 'src/components/Rating/Rating';
+import Skills from 'src/components/Skills/Skills';
+import VideoPlayer from 'src/components/VideoPlayer/VideoPlayer';
 
-import pluralize from '../../../helpers/pluralize';
-import Lesson from '../../components/Lesson/Lesson';
-import Popup from '../../components/Popup/Popup';
-import Rating from '../../components/Rating/Rating';
-import Skills from '../../components/Skills/Skills';
-import Video from '../../components/Video/Video';
+import pluralize from 'helpers/pluralize'
 
 import styles from './CoursePage.scss';
 
@@ -59,18 +60,13 @@ const CoursePage = () => {
         <div className={styles.course__lessons}>
           <h2 className={styles.course__lessonsTitle}>Lessons</h2>
           {lessons.map((lesson) => (
-            <Lesson
-              key={lesson.id}
-              lesson={lesson}
-            />
+            <Lesson key={lesson.id} lesson={lesson} />
           ))}
         </div>
       </div>
-      {showPopup && (
-        <Popup show={showPopup} onClose={() => setShowPopup(false)}>
-          <Video videoLink={link} previewImageLink={previewImageLink} />
-        </Popup>
-      )}
+      <Popup show={showPopup} onClose={() => setShowPopup(false)}>
+        <VideoPlayer videoLink={link} previewImageLink={previewImageLink} />
+      </Popup>
     </>
   );
 };

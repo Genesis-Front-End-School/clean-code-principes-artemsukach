@@ -24,6 +24,13 @@ module.exports = {
     liveReload: true,
   },
   resolve: {
+    alias: {
+      utils: path.resolve(__dirname, './utils/'),
+      helpers: path.resolve(__dirname, './helpers/'),
+      hooks: path.resolve(__dirname, './hooks/'),
+      src: path.resolve(__dirname, './src/'),
+      api: path.resolve(__dirname, './api/'),
+    },
     extensions: ['.js', '.jsx', '.json'],
   },
   module: {
