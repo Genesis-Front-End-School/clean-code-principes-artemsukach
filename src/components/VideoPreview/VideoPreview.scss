@@ -1,0 +1,27 @@
+.video__videoPreview_hidden {
+  animation: 0.7s hide-preview linear forwards;
+}
+
+.video__videoPreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  border-radius: 4px 4px 0 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes hide-preview {
+  0% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

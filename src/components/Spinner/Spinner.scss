@@ -1,0 +1,34 @@
+.spinner {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #29303b;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
+.overlay {
+  visibility: visible;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+	justify-content: center;
+	align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #29303b;
+	opacity: 1;
+  transition: opacity 500ms;
+	z-index: 100;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
